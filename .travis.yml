@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.6"
+services:
+  - mongodb
+before_install:
+  - pip install coveralls
+install:
+  - pip install -r requirements.txt
+script:
+  - make coverage
+after_success:
+  - coveralls

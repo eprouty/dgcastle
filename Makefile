@@ -4,4 +4,7 @@ init:
 test:
 	python3 -m unittest
 
-.PHONY: init test
+coverage:
+	coverage run --source dgcastle -m unittest
+
+.PHONY: init test coverage
