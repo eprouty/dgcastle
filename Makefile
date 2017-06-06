@@ -1,5 +1,5 @@
 init:
-	pipenv install --dev
+	python3 -m venv .venv
 
 test:
 	python3 -m unittest

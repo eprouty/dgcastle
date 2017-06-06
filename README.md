@@ -4,7 +4,7 @@ A statistics tracking tool for disc golf, with a focus on team challenge.
 
 ## Getting Started
 
-This project is configured using [pipenv](https://github.com/kennethreitz/pipenv) to manage dependencies and virtual env.  To get started run:
+This project is configured using virtualenv and python3, to get started make sure both of those are installed on your system and run:
 
 `make init`
 
