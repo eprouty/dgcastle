@@ -1,19 +1,21 @@
 '''DGCastle: A disc golf statistics tracking tool'''
 import collections
-MatchPlay = collections.namedtuple('MatchPlay', ['winner', 'loser', 'result'])
+import pymongo
 
-STATE = []
+from dgcastle.handlers.match_play import MatchPlay
 
-def input_match_play(matches):
-    if not isinstance(matches, list):
-        matches = [matches]
+class DGCastle(MatchPlay):
+    def __init__(self, testDb=None):
+        self.testDb = testDb
 
-    for match in matches:
-        STATE.append(MatchPlay(match[0], match[1], match[2]))
+        # Setup the MongoDB client
+        self.mongoClient = pymongo.MongoClient()
+        if not testDb:
+            # Production database
+            self.db = self.mongoClient.dgcastle
+        else:
+            self.db = self.mongoClient[testDb]
 
-def get_result(player1, player2):
-    return MatchPlay('Player1', 'Player2', '2&1')
-
-def get_results(player):
-    results = [x for x in STATE if (x.winner == player or x.loser == player)]
-    return results
+    def __del__(self):
+        if self.testDb:
+            self.mongoClient.drop_database(self.testDb)
