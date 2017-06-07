@@ -10,4 +10,7 @@ coverage:
 server:
 	python3 server.py
 
-.PHONY: init test coverage server
+deploy:
+	git push heroku master
+
+.PHONY: init test coverage server deploy

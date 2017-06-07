@@ -1,5 +1,4 @@
-# dgcastle
-[![Build Status](https://travis-ci.org/eprouty/dgcastle.svg?branch=master)](https://travis-ci.org/eprouty/dgcastle)  [![Coverage Status](https://coveralls.io/repos/github/eprouty/dgcastle/badge.svg?branch=master)](https://coveralls.io/github/eprouty/dgcastle?branch=master)
+# <div style="text-align: center">DGCastle<br/>[![Build Status](https://travis-ci.org/eprouty/dgcastle.svg?branch=master)](https://travis-ci.org/eprouty/dgcastle)  [![Coverage Status](https://coveralls.io/repos/github/eprouty/dgcastle/badge.svg?branch=master)](https://coveralls.io/github/eprouty/dgcastle?branch=master)</div>
 
 A statistics tracking tool for disc golf, with a focus on team challenge.
 
