@@ -17,5 +17,5 @@ class DGCastle(MatchPlay):
             self.db = self.mongoClient[testDb]
 
     def __del__(self):
-        if self.testDb:
+        if self.testDb and self.testDb != 'dgcastle':
             self.mongoClient.drop_database(self.testDb)
