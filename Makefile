@@ -7,4 +7,7 @@ test:
 coverage:
 	coverage run --source dgcastle -m unittest
 
-.PHONY: init test coverage
+server:
+	python3 server.py
+
+.PHONY: init test coverage server

@@ -1,5 +1,5 @@
 '''DGCastle: A disc golf statistics tracking tool'''
-import collections
+import os
 import pymongo
 
 from dgcastle.handlers.match_play import MatchPlay
@@ -9,12 +9,18 @@ class DGCastle(MatchPlay):
         self.testDb = testDb
 
         # Setup the MongoDB client
-        self.mongoClient = pymongo.MongoClient()
-        if not testDb:  # pragma: no cover
-            # Production database
+        
+        # Production database
+        if os.environ.get('MONGODB_URI'):
+            self.mongoClient = pymongo.MongoClient(os.environ['MONGODB_URI'])
             self.db = self.mongoClient.dgcastle
+            print("Using production database!")
         else:
-            self.db = self.mongoClient[testDb]
+            self.mongoClient = pymongo.MongoClient()
+            if not testDb:  # pragma: no cover
+                self.mongoClient.dgcastle
+            else:
+                self.db = self.mongoClient[testDb]
 
     def __del__(self):
         if self.testDb and self.testDb != 'dgcastle':
