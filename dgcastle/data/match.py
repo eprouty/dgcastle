@@ -7,12 +7,12 @@ def _validate_result(result):
                 "<X>&<Y> where X > 1 and X > Y >= 1 and X - Y <= 2
             2. A victory that ended at 18 holes
                 "<X>up" where 0 < X < 3
-            3. A tie
-                a. "tie"
+            3. A tie or "all square"
+                a. "tie" or "as"
         """
         if '.' in result:
             raise ValidationException("Result '{}' should not contain decimals".format(result))
-        elif result == "tie":
+        elif result in ['tie', 'as']:
             # Simplest case, already valid, good to go
             pass
         elif "up" in result:

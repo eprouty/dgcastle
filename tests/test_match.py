@@ -6,6 +6,7 @@ from dgcastle.data.match import ValidationException
 class TestResultValidation(unittest.TestCase):
     def test_tie(self):
         self.assertEqual(match._validate_result('tie'), 'tie')
+        self.assertEqual(match._validate_result('as'), 'as')
 
     def test_XupFormat(self):
         self.assertEqual(match._validate_result('1up'), '1up')
@@ -34,4 +35,5 @@ class TestResultValidation(unittest.TestCase):
         self.assertRaises(ValidationException, match._validate_result, '1&-1')
         self.assertRaises(ValidationException, match._validate_result, '4.1&1')
         self.assertRaises(ValidationException, match._validate_result, '4&1.1')
+        self.assertRaises(ValidationException, match._validate_result, '3&2&1')
         

@@ -10,7 +10,7 @@ class DGCastle(MatchPlay):
 
         # Setup the MongoDB client
         self.mongoClient = pymongo.MongoClient()
-        if not testDb:
+        if not testDb:  # pragma: no cover
             # Production database
             self.db = self.mongoClient.dgcastle
         else:

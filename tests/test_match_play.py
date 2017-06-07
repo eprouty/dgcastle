@@ -25,6 +25,10 @@ class TestInputMethods(unittest.TestCase):
         self.dgcastle.matchplay_csv("tests/fixtures/simple_matchplay.csv")
         self.assertEqual(self.dgcastle.db.match_play.count(), 5)
 
+    def test_importLongCSV(self):
+        self.dgcastle.matchplay_csv("tests/fixtures/partial_goat_results.csv")
+        self.assertEqual(self.dgcastle.db.match_play.count(), 71)
+
 class TestReadMethods(unittest.TestCase):
     def setUp(self):
         self.dgcastle = dgcastle.DGCastle(testDb="TestReadMethods")
@@ -40,6 +44,7 @@ class TestReadMethods(unittest.TestCase):
 
     def test_findResultsForPlayer2(self):
         results = self.dgcastle.matchplay_results('Player2')
+        print(matchFixture1)  # Make sure to cover the __repr__ function too
         self.assertEqual(results, [matchFixture1])
 
 if __name__ == '__main__':
