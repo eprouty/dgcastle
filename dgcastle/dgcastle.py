@@ -11,7 +11,7 @@ class DGCastle(MatchPlay):
         # Setup the MongoDB client
         
         # Production database
-        if os.environ.get('MONGODB_URI'):
+        if os.environ.get('MONGODB_URI'): # pragma: no cover
             self.mongoClient = pymongo.MongoClient(os.environ['MONGODB_URI'])
             self.db = self.mongoClient.dgcastle
             print("Using production database!")

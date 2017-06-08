@@ -44,7 +44,7 @@ class TestReadMethods(unittest.TestCase):
 
     def test_findResultsForPlayer2(self):
         results = self.dgcastle.matchplay_results('Player2')
-        print(matchFixture1)  # Make sure to cover the __repr__ function too
+        matchFixture1.__repr__()  # Make sure to cover the __repr__ function too
         self.assertEqual(results, [matchFixture1])
 
 if __name__ == '__main__':
