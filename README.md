@@ -24,3 +24,14 @@ You can leave the virtualenv using:
 Tests use the python3 unittest library and can be run using:
 
 `make test`
+
+## Importing Data
+Format for match play input follows these rules for validating results.
+
+Matchplay results can have 1 of 3 different types of values...
+1. A victory that ended before all 18 holes were played
+    * "X&Y where X > 1 and X > Y >= 1 and X - Y <= 2
+2. A victory that ended at 18 holes
+    * "Xup" where 0 < X < 3
+3. A tie or "all square"
+    * "tie" or "as"

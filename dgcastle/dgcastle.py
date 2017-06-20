@@ -3,15 +3,16 @@ import os
 import pymongo
 
 from dgcastle.handlers.match_play import MatchPlay
+from dgcastle.handlers.challonge import Challonge
 
-class DGCastle(MatchPlay):
+class DGCastle(Challonge, MatchPlay):
     def __init__(self, testDb=None):
-        self.testDb = testDb
+        super().__init__()
 
-        # Setup the MongoDB client
+        self.testDb = testDb
         
-        # Production database
         if os.environ.get('MONGODB_URI'): # pragma: no cover
+            # Production database
             self.mongoClient = pymongo.MongoClient(os.environ['MONGODB_URI'])
             self.db = self.mongoClient.dgcastle
             print("Using production database!")

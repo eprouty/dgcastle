@@ -1,6 +1,7 @@
 import csv
 
 from dgcastle.data.match import Match
+from dgcastle.data.player import Player
 
 class HeaderException(Exception):
     """Raises concerns about the way you've formatted your csv files."""
@@ -31,7 +32,7 @@ class MatchPlay():
             if None in [winnerCol, loserCol, resultCol]:
                 raise HeaderException("Matchplay csv record is missing proper headers.\nRequires: 'winner', 'loser', 'result'")
             for row in matchReader:
-                self.matchplay_input(Match(row[winnerCol], row[loserCol], row[resultCol]))
+                self.matchplay_input(Match(Player(row[winnerCol]), Player(row[loserCol]), row[resultCol]))
 
     def matchplay_results(self, player):
         results = []

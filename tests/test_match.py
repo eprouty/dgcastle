@@ -1,7 +1,7 @@
 import unittest
 
 from dgcastle.data import match
-from dgcastle.data.match import ValidationException
+from dgcastle.exceptions import ValidationException
 
 class TestResultValidation(unittest.TestCase):
     def test_tie(self):
@@ -26,6 +26,7 @@ class TestResultValidation(unittest.TestCase):
         self.assertRaises(ValidationException, match._validate_result, '4&1')
         self.assertEqual(match._validate_result('4&2'), '4&2')
         self.assertEqual(match._validate_result('10&8'), '10&8')
+        self.assertEqual(match._validate_result('2+1'), '2+1')
         self.assertRaises(ValidationException, match._validate_result, '10&7')
         self.assertRaises(ValidationException, match._validate_result, '4&')
         self.assertRaises(ValidationException, match._validate_result, '&1')
@@ -36,4 +37,17 @@ class TestResultValidation(unittest.TestCase):
         self.assertRaises(ValidationException, match._validate_result, '4.1&1')
         self.assertRaises(ValidationException, match._validate_result, '4&1.1')
         self.assertRaises(ValidationException, match._validate_result, '3&2&1')
+        self.assertRaises(ValidationException, match._validate_result, '2&+1')
+        self.assertRaises(ValidationException, match._validate_result, '2+&1')
+
+    def test_challongeFormatting(self):
+        self.assertEqual(match._validate_result('2-1'), '2&1')
+        self.assertEqual(match._validate_result('1-2'), '2&1')
+        self.assertEqual(match._validate_result('2-0'), '2up')
+        self.assertEqual(match._validate_result('0-2'), '2up')
+        self.assertRaises(ValidationException, match._validate_result, '0-0')
+        self.assertRaises(ValidationException, match._validate_result, '0-')
+        self.assertRaises(ValidationException, match._validate_result, '-0')
+        self.assertRaises(ValidationException, match._validate_result, '5-1')
+        self.assertRaises(ValidationException, match._validate_result, '0--0')
         

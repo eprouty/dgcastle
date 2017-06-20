@@ -2,9 +2,11 @@ import unittest
 
 from dgcastle import dgcastle
 from dgcastle.data import match
+from dgcastle.data.player import Player
+from dgcastle.handlers.match_play import HeaderException
 
-matchFixture1 = match.Match('Player1', 'Player2', '2&1')
-matchFixture2 = match.Match('Player3', 'Player1', '1up')
+matchFixture1 = match.Match(Player('Player1'), Player('Player2'), '2&1')
+matchFixture2 = match.Match(Player('Player3'), Player('Player1'), '1up')
 
 class TestInputMethods(unittest.TestCase):
     def setUp(self):
@@ -24,6 +26,9 @@ class TestInputMethods(unittest.TestCase):
     def test_canImportCSV(self):
         self.dgcastle.matchplay_csv("tests/fixtures/simple_matchplay.csv")
         self.assertEqual(self.dgcastle.db.match_play.count(), 5)
+
+    def test_reportsHeaderErrors(self):
+        self.assertRaises(HeaderException, self.dgcastle.matchplay_csv, 'tests/fixtures/header_error.csv')
 
     def test_importLongCSV(self):
         self.dgcastle.matchplay_csv("tests/fixtures/partial_goat_results.csv")
